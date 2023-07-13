@@ -1,0 +1,33 @@
+SELECT
+    j->>'business_id' AS business_id,
+    j->>'name' AS name,
+    j->>'address' AS address,
+    j->>'city' AS city,
+    j->>'state' AS state,
+    j->>'postal_code' AS postal_code,
+    j->>'latitude' AS latitude,
+    j->>'longitude' AS longitude,
+    j->>'stars' AS stars,
+    j->>'review_count' AS review_count,
+    j->>'is_open' AS is_open,
+    j->>'categories' AS categories,
+    j->>'hours' AS hours,
+    j->>'attributes' AS attributes
+FROM
+    public.business;
+
+SELECT
+public.review.j->>'review_id' AS review_id,
+public.review.j->>'user_id' AS user_id,
+public.review.j->>'business_id' AS business_id,
+public.review.j->>'stars' AS stars,
+public.review.j->>'text' AS text,
+public.review.j->>'useful' AS useful,
+public.review.j->>'cool' AS cool,
+public.review.j->>'funny' AS funny,
+public.review.j->>'date' AS date
+FROM
+public.review,public.business
+WHERE
+public.review.j->>'business_id' = public.business.j->>'business_id'
+AND public.business.j->>'city' = 'Akron';
